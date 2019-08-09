@@ -1,5 +1,9 @@
 #!/bin/bash
 
+zabbix_server_host=$1
+zabbix_monitor_host="MoneyForward"
+zabbix_monitor_item="networth"
+
 login_cookie='/root/cookies/moneyforward_login.cookie'
 session_cookie='/root/cookies/moneyforward_session.cookie'
 
@@ -7,6 +11,17 @@ username=`cat ~/login/moneyforward.com.user`
 password=`openssl rsautl -decrypt -inkey ~/.ssh/id_rsa -in ~/login/moneyforward.com.passwd`
 
 user_agent="Mozilla/5.0"
+
+readonly program=$(basename $0)
+
+function print_usage_and_exit() {
+  echo >&2 "Usage: ${program} ZABBIX_SERVER_HOSTNAME"
+  exit 1
+}
+
+if [ $# -ne 1 ]; then
+  print_usage_and_exit
+fi
 
 function get_at(){
   row_data=`curl -s -c $login_cookie 'https://moneyforward.com/users/sign_in' -A $user_agent`
@@ -52,5 +67,5 @@ function get_net_worth(){
 }
 
 login > /dev/null
-get_net_worth
 
+zabbix_sender -z $zabbix_server_host -s $zabbix_monitor_host -k $zabbix_monitor_item -o `get_net_worth`
