@@ -7,8 +7,8 @@ zabbix_monitor_item="networth"
 login_cookie='/root/cookies/moneyforward_login.cookie'
 session_cookie='/root/cookies/moneyforward_session.cookie'
 
-username=`cat ~/login/moneyforward.com.user`
-password=`openssl rsautl -decrypt -inkey ~/.ssh/id_rsa -in ~/login/moneyforward.com.passwd`
+username=`/root/bash_tools/get_login_username.sh moneyforward.com`
+password=`/root/bash_tools/get_login_password.sh moneyforward.com`
 
 user_agent="Mozilla/5.0"
 
