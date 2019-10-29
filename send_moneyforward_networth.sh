@@ -4,11 +4,11 @@ zabbix_server_host=$1
 zabbix_monitor_host="MoneyForward"
 zabbix_monitor_item="networth"
 
-login_cookie='/root/cookies/moneyforward_login.cookie'
-session_cookie='/root/cookies/moneyforward_session.cookie'
+login_cookie=~/cookies/moneyforward_login.cookie
+session_cookie=~/cookies/moneyforward_session.cookie
 
-username=`/root/bash_tools/get_login_username.sh moneyforward.com`
-password=`/root/bash_tools/get_login_password.sh moneyforward.com`
+username=`~/bash_tools/get_login_username.sh moneyforward.com`
+password=`~/bash_tools/get_login_password.sh moneyforward.com`
 
 user_agent="Mozilla/5.0"
 
