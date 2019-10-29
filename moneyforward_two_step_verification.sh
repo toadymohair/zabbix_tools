@@ -1,6 +1,6 @@
 #!/bin/bash
 
-session_cookie='/root/cookies/moneyforward_session.cookie'
+session_cookie=~/cookies/moneyforward_session.cookie
 
 user_agent="Mozilla/5.0"
 verification_code=$1
