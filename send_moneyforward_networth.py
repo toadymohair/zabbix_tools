@@ -9,6 +9,8 @@ from subprocess import PIPE
 
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
 START_URL = 'https://moneyforward.com/users/sign_in'
+USER_DATA_DIR= '/home/ec2-user/cookies/moneyforward.com/'
+
 
 ZABBIX_SERVER_HOST = "localhost"
 ZABBIX_MONITOR_HOST = "MoneyForward"
@@ -24,6 +26,7 @@ def get_networth():
     chrome_option.add_argument('--no-sandbox')
     chrome_option.add_argument('--disable-gpu')
     chrome_option.add_argument('user-agent=' + USER_AGENT)
+    chrome_option.add_argument('--user-data-dir=' + USER_DATA_DIR)
     driver = webdriver.Chrome(executable_path="/usr/bin/chromedriver", options=chrome_option)
     browser.set_driver(driver)
 
