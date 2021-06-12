@@ -33,16 +33,19 @@ def get_networth():
     # ログイン画面を開く
     browser.open_url(START_URL)
 
-    # 「メールアドレスでログイン」ボタンをクリック（"_2YH0UDm8 ssoLink" クラスの一番上のボタン）
-    s('a[class="_2YH0UDm8 ssoLink"]').click()
+    # （ss でログインボタンのクラス指定でコレクション取得した結果がfalse (＝ログインボタンが存在しない）なら、ログイン済みと判断。
+    if(ss('a[class="_2YH0UDm8 ssoLink"]')):
 
-    # ユーザ名（メールアドレス）を入力し、submit
-    s('input[name="mfid_user[email]"]').set_value(username)
-    s('input[type="submit"]').click()
+        # 「メールアドレスでログイン」ボタンをクリック（"_2YH0UDm8 ssoLink" クラスの一番上のボタン）
+        s('a[class="_2YH0UDm8 ssoLink"]').click()
 
-    # パスワードを入力し、submit -> ここまででログイン完了
-    s('input[name="mfid_user[password]"]').set_value(password)
-    s('input[type="submit"]').click()
+        # ユーザ名（メールアドレス）を入力し、submit
+        s('input[name="mfid_user[email]"]').set_value(username)
+        s('input[type="submit"]').click()
+
+        # パスワードを入力し、submit -> ここまででログイン完了
+        s('input[name="mfid_user[password]"]').set_value(password)
+        s('input[type="submit"]').click()
 
     # 「...」 をクリック
     s('a[href="/analysis/monthly_reports/latest"]').click()
