@@ -9,6 +9,7 @@ from subprocess import PIPE
 
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
 START_URL = 'https://moneyforward.com/users/sign_in'
+BS_URL = 'https://moneyforward.com/bs/balance_sheet'
 USER_DATA_DIR= '/home/ec2-user/cookies/moneyforward.com/'
 
 
@@ -36,7 +37,7 @@ def get_networth():
     # （ss でログインボタンのクラス指定でコレクション取得した結果がfalse (＝ログインボタンが存在しない）なら、ログイン済みと判断。
     if(ss('a[class="_2YH0UDm8 ssoLink"]')):
 
-        # 「メールアドレスでログイン」ボタンをクリック（"_2YH0UDm8 ssoLink" クラスの一番上のボタン）
+    # 「メールアドレスでログイン」ボタンをクリック（"_2YH0UDm8 ssoLink" クラスの一番上のボタン）
         s('a[class="_2YH0UDm8 ssoLink"]').click()
 
         # ユーザ名（メールアドレス）を入力し、submit
@@ -47,11 +48,8 @@ def get_networth():
         s('input[name="mfid_user[password]"]').set_value(password)
         s('input[type="submit"]').click()
 
-    # 「...」 をクリック
-    s('a[href="/analysis/monthly_reports/latest"]').click()
-
-    # 「バランスシート」をクリック
-    s('a[href="/bs/balance_sheet"]').click()
+    # バランスシートのページに遷移
+    browser.open_url(BS_URL)
 
     #「純資産」欄のテキストを取得
     networth_text = s(by.xpath('//*[@id="bs-balance-sheet"]/section/section[2]/div/div[2]/section[2]/table/tbody/tr/td[1]')).text
