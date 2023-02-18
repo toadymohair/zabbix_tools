@@ -5,7 +5,7 @@ zabbix_monitor_host="RP01"
 zabbix_monitor_item_ul="sptest_ul"
 zabbix_monitor_item_dl="sptest_dl"
 
-SP_TEST_RESULT=`speedtest -L | grep "OPEN Project" | awk '{print $1}' | xargs speedtest -f json -s`
+SP_TEST_RESULT=`speedtest -L | grep "SoftEther" | awk '{print $1}' | xargs speedtest -f json -s`
 
 #echo $SP_TEST_RESULT
 
