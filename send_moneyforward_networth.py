@@ -11,7 +11,8 @@ from subprocess import PIPE
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'
 START_URL = 'https://moneyforward.com/users/sign_in'
 BS_URL = 'https://moneyforward.com/bs/balance_sheet'
-USER_DATA_DIR= '/home/ec2-user/cookies/moneyforward.com/'
+# USER_DATA_DIR= '/home/ec2-user/cookies/moneyforward.com/'
+USER_DATA_DIR= 'cookies/moneyforward.com/'
 
 
 ZABBIX_SERVER_HOST = "localhost"
@@ -50,13 +51,13 @@ def get_networth():
         # パスワードを入力し、submit -> ここまででログイン完了
         driver.find_element(By.NAME, "mfid_user[password]").clear()
         driver.find_element(By.NAME, "mfid_user[password]").send_keys(password)
-        driver.find_element(By.ID, 'submitto').click()
 
-        time.sleep(3)
+        wait.until(EC.presence_of_all_elements_located)
+
 
     # バランスシートのページに遷移
-    # browser.open_url(BS_URL)
     driver.get(BS_URL)
+    # driver.save_screenshot('BS_page_screenshot.png')
 
     #「純資産」欄のテキストを取得
     networth_text = driver.find_element(By.XPATH, '//*[@id="bs-balance-sheet"]/section/section[2]/div/div[2]/section[2]/table/tbody/tr/td[1]').text
